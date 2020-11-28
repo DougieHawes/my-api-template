@@ -1,8 +1,7 @@
-const { app, cors, dotenv, mongoose, expressJson } = require("./seeder");
-
-dotenv.config();
+require("dotenv").config();
 
 // DATABASE
+const mongoose = require("mongoose");
 const mongoUri = process.env.MONGODB_URI;
 
 mongoose.connect(
@@ -12,8 +11,13 @@ mongoose.connect(
 );
 
 // APP
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+
 app.use(cors());
-app.use(expressJson);
+app.use(express.json());
 
 const authRoute = require("./routes/api/auth");
 const postRoute = require("./routes/api/post");
